@@ -1,4 +1,4 @@
-# AnkaraKulturMirasiHaritasi
+# KM-CBS (Ankara Kültür Mirası Haritası)
 Ankara İline Ait Kültür Miraslarının Harita Üzerinde Gösterilmesi
 
 <b><i>Kullanılan Teknolojiler</i></b>
