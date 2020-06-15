@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ankara Kültürel Mirası Haritası | KM-CBS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ankara Kültürel Miras Haritası">
+  <meta name="author" content="Can Mavioğlu">
+  <meta name="keywords" content="CBS, KM-CBS, Coğrafi Bilgi Sistemi, Ankara Kültür Mirası">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- Leaflet All Library CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.0/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.0/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/gokertanrisever/leaflet-ruler/master/src/leaflet-ruler.css">
+  <link rel="stylesheet" href="dist/css/leaflet-search.css" />
+  <link rel="stylesheet" href="dist/css/leaflet-search.mobile.css" />
+  <link rel="stylesheet" href="dist/css/Control.FullScreen.css" />
+  <link rel="stylesheet" href="dist/css/Leaflet.Coordinates-0.1.5.css" />
+  <link rel="stylesheet" href="dist/css/leaflet.contextmenu.min.css" />
+  <link rel="stylesheet" href="dist/css/leaflet-history.css" />
+  <!-- Ekko Lightbox -->
+  <link rel="stylesheet" href="plugins/ekko-lightbox/ekko-lightbox.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
+  <!-- Custom Style-->
+  <link rel="stylesheet" href="dist/css/customStyle.css">
+</head>
+<body class="hold-transition sidebar-mini sidebar-collapse layout-footer-fixed layout-navbar-fixed layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+      <!-- <li class="nav-item d-none d-sm-inline-block">
+        <a href="#" class="nav-link">Ana Sayfa</a>
+      </li> -->
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a title="GitHub" class="nav-link" target="_blank" href="https://github.com/canmavi/km-cbs" role="button">
+          <i class="fab fa-github fa-2x"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="#" class="brand-link">
+      <img src="dist/img/CBSLogo.png" alt="CBS Logo" class="brand-image elevation-3">
+      <span class="brand-text font-weight-light"><b><i class="km-text">KM - CBS</i></b></span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <!-- <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Ana Sayfa
+              </p>
+            </a>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a href="HindistanMap.html" class="nav-link">
+              <i class="nav-icon fas fa-globe-asia"></i>
+              <p>
+                Hindistan
+              </p>
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <a href="AnkaraMap.html.html" class="nav-link active">
+              <i class="nav-icon fas fa-map-marker-alt"></i>
+              <p>
+                Ankara
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a onclick="showInfo()" class="nav-link">
+            <i class="nav-icon fas fa-info-circle"></i>
+            <p>
+               Bilgi
+            </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header display-no">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Ankara</h1>
+          </div>
+          <!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Ana Sayfa</a></li>
+              <li class="breadcrumb-item active">Ankara</li>
+            </ol>
+          </div>
+          <!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+          <!-- Harita -->
+            <div id="map">
+                <!--Harita Burada Dolduruluyor -->
+            </div>
+            <div class="leaflet-custom-frontbutton">
+              <button type="button" onclick="fitBounds()" class="btn btn-block bg-gradient-danger btn-md">Ankara</button>
+              <button type="submit" title="Verileri İndir" onclick="downloadURI('data/AnkaraData.json','AnkaraData')" class="btn bg-gradient-primary btn-md btn-pgdownload"><i class="fas fa-download"></i></button>
+              <!-- <button type="submit" title="Ekran Görüntüsü Al" class="btn bg-gradient-success btn-md btn-pgdownload"><i class="far fa-image"></i></button> -->
+          </div>
+
+          <div id='searchContainer'>
+          </div>
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!--Footer-->
+  <footer class="main-footer">
+    <img src="/dist/img/hulogo2.png" class="img-fluid hacettepe-logo">
+    <strong class="footer-hu">
+        <a target="_blank" href="http://www.bby.hacettepe.edu.tr/">&nbsp;
+        Hacettepe Üniversitesi - Bilgi Belge Yönetimi</a>&nbsp;
+    </strong>
+    <strong class="footer-bracket">&nbsp;|&nbsp;</strong>
+    <strong class="footer-project">Dönem Projesi (2020)</strong>
+    <div class="float-right d-none d-sm-inline-block mobile-scn">
+      <b>Versiyon</b> 1.0
+    </div>
+  </footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- Modal -->
+<!-- Bilgi Modal -->
+<div class="modal fade" id="modal-info">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header imodal-headPadding">
+          <h4 class="modal-title"><i class="fas fa-info-circle"></i> Bilgi</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Kapat" title="Kapat">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body imodal-bodyPadding">
+            <div class="col-12 col-sm-12">
+                <div class="card card-primary card-outline card-tabs">
+                  <div class="card-header p-0 pt-1 border-bottom-0">
+                    <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="custom-tabs-three-project-tab" data-toggle="pill" href="#custom-tabs-three-project" role="tab" aria-controls="custom-tabs-three-project" aria-selected="true"><i class="far fa-question-circle"></i> Proje Hakkında</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-three-tekno-tab" data-toggle="pill" href="#custom-tabs-three-tekno" role="tab" aria-controls="custom-tabs-three-tekno" aria-selected="true"><i class="fas fa-code"></i> Kullanılan Teknolojiler</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-three-developer-tab" data-toggle="pill" href="#custom-tabs-three-developer" role="tab" aria-controls="custom-tabs-three-developer" aria-selected="false"><i class="fas fa-terminal"></i> Geliştirici</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-body">
+                    <div class="tab-content" id="custom-tabs-three-tabContent">
+                      <div class="tab-pane fade show active" id="custom-tabs-three-project" role="tabpanel" aria-labelledby="custom-tabs-three-project-tab">
+                        <img src="dist/img/Hacettepe_Üniversitesi_Logosu.svg" class="rounded mx-auto d-block hu-svglogo">
+                        <h4 class="text-center"><b>Hacettepe Üniversitesi</b></h4>
+                        <h5 class="text-center"><b>Bilgi Belge Yönetimi - Dönem Projesi (2020)</b></h5>
+                        <p class="text-justify">
+                          Harita üzerinde Ankara'daki kültürel mirasların gösterilmesi sağlanacaktır.
+                        </p>
+                      </div>
+                      <div class="tab-pane fade" id="custom-tabs-three-tekno" role="tabpanel" aria-labelledby="custom-tabs-three-tekno-tab">
+                        <div class="card">
+                          <div class="card-body p-0">
+                            <table class="table table-striped">
+                              <tbody>
+                                <tr>
+                                  <td class="table-id">1.</td>
+                                  <td><i class="fab fa-html5 fa-lg"></i> HTML</td>
+                                  <td class="table-code"><span class="badge bg-danger">HTML</span></td>
+                                </tr>
+                                <tr>
+                                  <td class="table-id">2.</td>
+                                  <td><i class="fab fa-css3-alt fa-lg"></i> CSS</td>
+                                  <td class="table-code"><span class="badge bg-warning">CSS</span></td>
+                                </tr>
+                                <tr>
+                                  <td class="table-id">3.</td>
+                                  <td><i class="fab fa-js fa-lg"></i> JavaScript (Kütüphaneler: <img src="dist/img/jquery-logo.png" class="img-fluid jquery-logo"> , <img src="dist/img/leaflet-logo.png" class="img-fluid leaflet-logo">)</td>
+                                  <td class="table-code"><span class="badge bg-primary">JavaScript</span></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <!-- /.card-body -->
+                        </div>
+                     </div>
+                      <div class="tab-pane fade" id="custom-tabs-three-developer" role="tabpanel" aria-labelledby="custom-tabs-three-developer-tab">
+                        <div class="col-12 col-sm-12 col-md-12 align-items-stretch">
+                            <div class="card bg-light">
+                              <div class="card-header text-muted border-bottom-0">
+                                <i class="fas fa-laptop-code"></i> Yazılım Geliştirme Uzmanı
+                              </div>
+                              <div class="card-body pt-0">
+                                <div class="row">
+                                  <div class="col-9">
+                                    <h2 class="lead"><b>Can Mavioğlu</b></h2>
+                                    <p class="text-muted text-md"><b><i class="fab fa-microsoft"></i> .NET </p>
+                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                      <li class="small"><span class="fa-li"><i class="fas fa-map-marker-alt fa-md"></i></span> Ankara, Türkiye</li>
+                                      <li class="small"><span class="fa-li"><i class="fas fa-at fa-md"></i></span> E-Posta: <a title="E-Posta Göndermek için Tıklayınız." href='mailto:canmavi91@gmail.com'>canmavi91@gmail.com</a></li>
+                                      <li class="small"><span class="fa-li"><i class="fab fa-github fa-md"></i></span> GitHub: <a target="_blank" href="https://github.com/canmavi">https://github.com/canmavi</a></li>
+                                    </ul>
+                                  </div>
+                                  <div class="col-3 text-center">
+                                    <img src="../../dist/img/cmfoto.jpg" alt="Can Mavioğlu" class="img-fluid dev-img-circle">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="card-footer">
+                                <div class="text-right">
+                                  <a target="_blank" href="https://tr.linkedin.com/in/can-mavioglu" class="btn btn-sm btn-primary">
+                                    <i class="fab fa-linkedin"></i>&nbsp; Linkedin'de Profili Görüntüle
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div> 
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.card -->
+                </div>
+              </div>
+        </div>
+        <div class="modal-footer imodal-footerPadding">
+          <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fas fa-times"></i> &nbsp;Kapat</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+<!-- Bilgi Modal -->
+  <!-- /.modal -->
+
+  <!-- Acilis Modal -->
+  <div class="modal fade" id="modal-open" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"><i class="fas fa-info-circle"></i> Bilgilendirme</h5>
+          <button type="button" onclick="closeModalOpen()" class="close" data-dismiss="modal" aria-label="Kapat">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="text-justify"><i class="far fa-hand-point-right"></i><b> Not:</b> Konumlar Değerleri (Enlem ve Boylam) Bulunduğu Konumu Yaklaşık Olarak Gösterebilir.
+          </p>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <div class="custom-control custom-checkbox">
+            <input class="custom-control-input" type="checkbox" id="notShowAgain">
+            <label for="notShowAgain" class="custom-control-label">Tekrar Gösterme</label>
+          </div>
+          <button type="button" onclick="closeModalOpen()" class="btn btn-primary" data-dismiss="modal"><i class="fas fa-times"></i> &nbsp;Kapat</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- Acilis Modal -->
+
+<!-- Detay Modal -->
+<div class="modal fade" id="modal-details">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header detail-modal-header">
+        <h4 class="modal-title"><i class="fas fa-info-circle fa-sm"></i> Detay - <span id="DetailName"></span></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Kapat" title="Kapat">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body detail-modal-body">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <th scope="row">İl :</th>
+                <td id="DetailCountryName"></td>
+              </tr>
+              <tr>
+                <th scope="row">İlçe :</th>
+                <td id="DetailDistrictName"></td>
+              </tr>
+              <tr>
+                <th scope="row">Türü :</th>
+                <td><span id="DetailType"></span></td>
+              </tr>
+              <tr>
+                <th scope="row">Notlar :</th>
+                <td><div contenteditable="false" class="form-control" id="DetailNotes"></div></td>
+              </tr>
+              <tr>
+                <th scope="row">Detay Linki :</th>
+                <td><i class="fas fa-external-link-alt fa-sm"></i><a id="DetailELink" target='_blank' title="Detay için Tıklayınız"></a></td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      </div>
+      <div class="modal-footer detail-modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fas fa-times"></i> &nbsp;Kapat</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- Detay Modal -->
+
+<!-- /.Modal -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Ekko Lightbox -->
+<script src="plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- Toastr -->
+<script src="plugins/toastr/toastr.min.js"></script>
+<!--Leaflet JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.0/leaflet.markercluster-src.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet.markercluster.layersupport@2.0.1/dist/leaflet.markercluster.layersupport.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-omnivore/0.3.4/leaflet-omnivore.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-groupedlayercontrol/0.6.1/leaflet.groupedlayercontrol.min.js"></script>
+<script src="dist/js/leaflet-search.js"></script>
+<script src="dist/js/leaflet-bing-layer.min.js"></script>
+<script src="dist/js/Control.FullScreen.js"></script>
+<script src="dist/js/Leaflet.Coordinates-0.1.5.min.js"></script>
+<script src="https://cdn.rawgit.com/gokertanrisever/leaflet-ruler/master/src/leaflet-ruler.js"></script>
+<script src="dist/js/leaflet.contextmenu.min.js"></script>
+<script src="dist/js/leaflet-history.js"></script>
+<script src="dist/js/appCookie.js"></script>
+
+<!-- Harita Yükleme --> 
+<script type="text/javascript">
+
+$( document ).ready(function() {
+    $('.nav-item')
+
+    /*Internet Explorer 9 ve Alti Uyarisi*/
+    if (L.Browser.ielt9)
+    toastr.warning('IE Tarayıcılarda Haritada Problem Yaşanabilir.','Internet Explorer')
+
+    if(!checkCookie()){
+      $('#modal-open').modal('show');      
+    }  
+});
+
+$(document).on('click', '[data-toggle="lightbox"]', function(event) {
+      event.preventDefault();
+      $(this).ekkoLightbox({
+        alwaysShowClose: true
+      });
+    });
+
+    var mapsBase = L.tileLayer ('https://a.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
+    {attribution: 'Hacettepe University - Term Project &copy; <a href="https://openstreetmap.org">OpenStreetMap</a>, © <a href="https://mapbox.com">Mapbox</a>',
+    maxZoom: 18,
+    id: 'dngupta.0hm7jnc4',
+    accessToken: 'pk.eyJ1IjoiZG5ndXB0YSIsImEiOiI3ZTUzNDI5MmUyYTBmNDA1NjhmMjViNGI4YTBmNTAxYyJ9.qpu0vHj2vN-pyclLRaj2Uw'}),
+    maps2 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 18,
+    attribution: 'Hacettepe University - Term Project &copy; Esri'
+    }),
+    maps3 = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+	  maxZoom: 16,
+	  attribution: 'Hacettepe University - Term Project &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://opentopomap.org">OpenTopoMap</a>'
+    }),
+    maps4 = L.tileLayer.bing('AuhiCJHlGzhg93IqUH_oCpl_-ZUrIE6SPftlyGYUvr9Amx5nzA-WqGcPquyFZl4L'),
+    maps5 = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+	  maxZoom: 18,
+    subdomains:['mt1','mt1','mt2','mt3'],
+	  attribution: 'Hacettepe University - Term Project / <img src="../../dist/img/google.svg" class="maplogo-custom"/> Google Haritalar'
+    }),
+    maps6 = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+	  maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3'],
+	  attribution: 'Hacettepe University - Term Project / <img src="../../dist/img/google.svg" class="maplogo-custom"/> Google Haritalar'
+    });
+
+    var map = L.map('map',{ center: [39.215757, 35.042289],zoom: 6,layers:[mapsBase],
+      /*Sag click*/
+      contextmenu: true,
+      contextmenuWidth: 200,
+	      contextmenuItems: [{
+		      text: 'Koordinatları Göster',
+		      callback: showCoordinates
+	      }, {
+		      text: 'Noktayı Merkeze Hizala',
+		      callback: centerMap
+	      }, '-', {
+		      text: 'Zoom Büyült',
+		      icon: 'dist/img/zoom-in.png',
+		      callback: zoomIn
+	      }, {
+		      text: 'Zoom Küçült',
+		      icon: 'dist/img/zoom-out.png',
+		      callback: zoomOut
+	      },{
+		      text: '<b class="km-right-align">&copy; KM-CBS</b>',
+          disabled: true
+	      }
+    ]
+    }); //.setView([39.215757, 35.042289], 6);
+
+    /*Scale*/
+    var scale = L.control.scale(); 
+    //scale.setPosition('leftbottom');
+    scale.addTo(map);
+
+    /*Zoom Butonlarinin Posizosyanlarinin Ayarlanmasi*/
+    map.zoomControl.setPosition('bottomright');
+
+    /*Zoom Sinirlari icin Uyari*/
+    var onlyWarning = false;
+    L.DomEvent.on(document.getElementById('map'), 'wheel', function (ev) 
+    {
+      var currentZoom = map.getZoom();
+      if (map.getMaxZoom() == currentZoom && onlyWarning != true) 
+      {
+        toastr.warning('Seçili Harita için Maksimum Sınıra Ulaşılmıştır.','Zoom')
+        onlyWarning = true;
+      }
+    });
+
+    //Harita Verileri Yükleme
+    var markers =  omnivore.geojson('data/AnkaraData.json')
+    .on('ready', function (layer) {
+    //map.fitBounds(markers.getBounds());
+    markerClusters.addLayer(markers);
+    map.addLayer(markerClusters);
+    this.eachLayer(function (marker) {
+        marker.bindPopup(
+        fotoController(marker.toGeoJSON().properties.ImgName,marker.toGeoJSON().properties.Name) +
+        nameLogoChooser(marker.toGeoJSON().properties.TypeEnum) +  '<b>' + marker.toGeoJSON().properties.Name + '</b>' +
+        '<br><b>Türü: </b>' + marker.toGeoJSON().properties.Type + 
+        '<br><b>Kültür: </b>' + marker.toGeoJSON().properties.Culture +
+        '<br><b>Yıl: </b>' + dateController(marker.toGeoJSON().properties.Dated) + 
+        externalButtonController(marker.toGeoJSON().properties.Id), { autoPanPadding: [5, 55] });
+        });
+    });
+
+    var markerClusters = L.markerClusterGroup({
+      disableClusteringAtZoom: 18
+    });
+    map.addLayer(markerClusters);
+    
+    var multipleMaps = {
+    "<i class='fas fa-map-marked-alt fa-lg layer-set-default'></i> Harita 1": mapsBase,
+    "<i class='fas fa-map-marked-alt fa-lg layer-set-others'></i> Harita 2": maps2,
+    "<i class='fas fa-map-marked-alt fa-lg layer-set-others'></i> Harita 3": maps3,
+    "<img src='../../dist/img/bing.svg' class='maplogo-custom'/> Bing": maps4,
+    "<img src='../../dist/img/google.svg' class='maplogo-custom'/> Google - <i class='fas fa-street-view fa-lg'></i>&nbsp;Sokak": maps5,
+    "<img src='../../dist/img/google.svg' class='maplogo-custom'/> Google - <i class='fas fa-satellite-dish fa-lg'></i>&nbsp;Uydu": maps6
+    };
+
+    /*Over Layers*/
+    var AnkaraOsmanliCamiler = markerClusters;
+    var overlays = {
+        "<i class='fas fa-mosque'></i> <span>Osmanlı Dönemi Camileri</span>": AnkaraOsmanliCamiler,
+    };
+
+    //Haritaları Ekle
+    L.control.layers(multipleMaps,overlays).addTo(map);
+
+    /*Alan Geri-Ileri*/
+    var history = new L.HistoryControl({     
+      backTooltip:'Geri Alana Dön',
+      forwardTooltip:'İleri Alana Git',
+      orientation:'horizontal',
+      backImage:'fas fa-arrow-left',
+      forwardImage:'fas fa-arrow-right',
+      position:'topright'
+    }).addTo(map);
+    /*Alan Geri-Ileri*/
+
+    /*Ruler*/
+        var options = {
+          position: 'topright',
+          lengthUnit: {
+            factor: 0.539956803,
+            label: 'Uzaklık:',
+            decimal: 2,
+            display: 'km'
+          },
+          angleUnit: {
+            label: 'Pusula Yönü:',
+            factor: null,
+            display: '&deg;'
+      }
+    };
+    L.control.ruler(options).addTo(map);
+    /*Ruler*/
+
+    /*Enlem-Boylam*/
+    L.control.coordinates({
+			position:"bottomright",
+			//decimals:2,
+      enableUserInput:false,
+			decimalSeperator:",",
+			labelTemplateLat:"<b>Enlem:</b> {y}",//Latitude
+			labelTemplateLng:"<i class='fas fa-location-arrow fa-sm'></i> <b>Boylam:</b> {x}"//Longitude
+		}).addTo(map);
+    /*Enlem-Boylam*/
+
+    /*Arama*/
+    var controlSearch = new L.Control.Search({
+      position:'topright',
+      initial: true,
+      zoom: 18,
+      layer: markerClusters,
+      propertyName: 'Name',
+      casesensitive: false,
+      tipAutoSubmit:true,
+      autoType:false,
+      tooltipLimit:12,
+      textCancel:'İptal',
+      textErr:'Aranan Bulunamadı!',
+      textPlaceholder:'Arama..',
+      hideMarkerOnCollapse:true,
+      autoCollapse:false,
+      buildTip: function(text, val) {
+			var type = val.layer.feature.properties.Type;
+			return '<a href="#">'+text+'<i class="fas fa-mosque search-result-icon"></i></span>'+'</a>';
+		  }
+    });
+
+    map.addControl(controlSearch);
+    /*Arama*/
+
+    /*Tam Ekran*/
+    L.control.fullscreen({
+      position: 'bottomright',
+      title: 'Tam Ekran Görüntüle',
+      titleCancel: 'Tam Ekrandan Çık'
+    }).addTo(map);
+
+    map.on('enterFullscreen', function(){
+      $(".leaflet-left .leaflet-control-scale").addClass("custom-scale");   
+    });
+
+    map.on('exitFullscreen', function(){
+      $(".leaflet-left .leaflet-control-scale").removeClass("custom-scale");
+    });
+    /*Tam Ekran*/
+
+    //Fonksiyonlar
+    function showInfo(){
+     $('#modal-info').modal('show');
+     $('#custom-tabs-three-project-tab').tab('show');
+    }
+
+    function nameLogoChooser(typeEnum){
+      //Default - Right Arrow 
+      //TypeEnum 1 - Cami
+      return typeEnum!==1 ? '<i class="fas fa-angle-right"></i> ' : '<i class="fas fa-mosque"></i> ';
+    }
+
+    function dateController(dated){
+      if(dated) return dated;
+      else return 'Tarih Girişi Olmamıştır.';
+    }
+
+    function noteController(note){
+      if(note) return note;
+      else return '- Veri Girişi Yok -';
+    }
+
+    function fotoController(fotoName, cName){
+      if(fotoName) 
+        return '<a href='+ "dist/img/AnkaraImages/" + fotoName  + ".jpg" +' data-toggle="lightbox" data-title="'+ 
+        cName +'" data-max-width="1000" data-type="image">' +
+        '<img src='+ "dist/img/AnkaraImages/" + fotoName + ".jpg" + ' class="img-fluid rounded popup-picture"></a>';
+      else return '';
+    }
+
+    function externalButtonController(LinkId){
+      if(LinkId) 
+        return '<br/><i class="far fa-hand-point-right fa-lg"></i> <a class="detailsShow" data-id="'+ LinkId +'">Detay Görüntüle</a>';
+      else return '';
+    }
+
+    /*Modal Detay Goster*/
+      //Event Delegating
+    $("body").on( "click", "a.detailsShow", function(e) {
+        e.preventDefault();
+        var vid = $(this).data("id");
+        SetDataDetailModal(vid);
+        return false;
+    });
+
+    function SetDataDetailModal(Id){
+      $.getJSON( "data/AnkaraData.json", function(json) {
+            $.each(json.features, function (key, val) {
+                if(val.properties.Id==Id){
+                  var odata = {
+                    name: val.properties.Name,
+                    country: val.properties.Country,
+                    district: val.properties.District,
+                    type: val.properties.Type,
+                    typeEnum: val.properties.TypeEnum,
+                    note: val.properties.Notes,
+                    elink: val.properties.SourceLink
+                  };
+                  SetAndShowDetailModal(odata);
+                }              
+            });
+        });
+      }
+
+      function SetAndShowDetailModal(odatas){
+        $("#DetailName").text(odatas.name);
+        $("#DetailCountryName").text(odatas.country);
+        $("#DetailDistrictName").text(odatas.district);
+        if(odatas.typeEnum == 1)
+          $("#DetailType").addClass("badge badge-danger detail-types");
+        else
+          $("#DetailType").addClass("badge badge-info detail-types");
+        $("#DetailType").text(odatas.type);
+        $("#DetailNotes").html(noteController(odatas.note));
+        $("#DetailELink").text(" "+odatas.elink);
+        $("#DetailELink").attr("href",odatas.elink);
+        
+        $('#modal-details').modal('show');
+      }
+    /*Modal Detay Goster*/
+
+    /*Bilgi-Modal*/
+    $('#custom-tabs-three-tab a').on('click', function (e) {
+      e.preventDefault();
+      //Color
+      $('#custom-tabs-three-tab a').find("i:first").removeClass("imodal-headColor");
+      $(this).find("i:first").addClass("imodal-headColor");
+
+      //Font
+      $('#custom-tabs-three-tab a').removeClass("imodal-headBold");
+      $(this).addClass("imodal-headBold");
+      $(this).tab('show');
+    });
+    /*Bilgi-Modal*/
+
+    function fitBounds(){
+      map.fitBounds(markers.getBounds());
+    }
+
+    function closeModalOpen(){
+      if ($('#notShowAgain').is(':checked')) {
+        setCookie('mapUser', 'mapAnkara', 60);
+        }
+    }
+
+    function downloadURI(uri, name) 
+    {
+      var link = document.createElement("a");
+      link.download = name;
+      link.href = uri;
+      link.click();
+    }
+
+    //Sag-click Fonksiyonlari
+    function showCoordinates (e) {
+      var konum = e.latlng.toString();
+      var konumDizi=konum.split(",");
+        toastr.success('Enlem: '+ konumDizi[0].split("(")[1] +'<br/>Boylam: '+konumDizi[1].replace(")",""),'Seçilen Koordinat')
+    }
+
+    function centerMap (e) {
+      map.panTo(e.latlng);
+    }
+
+    function zoomIn (e) {
+      map.zoomIn();
+    }
+
+    function zoomOut (e) {
+      map.zoomOut();
+    }
+    //Sag-click Fonksiyonlari
+  
+    $(window).on("load", function () {
+      $("#searchtext7").attr("spellcheck", "false");
+    });
+
+/*
+ * @copyright Can Mavioğlu (2020)
+ */
+</script>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+ <!DOCTYPE html>
+ <html lang="tr">
+     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Anasayfa - Kültürel Mirası Haritası | KM-CBS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Kültürel Miras Haritası">
+        <meta name="author" content="Can Mavioğlu">
+        <meta name="keywords" content="CBS, KM-CBS, Coğrafi Bilgi Sistemi, Ankara Kültür Mirası">
+     </head>
+     <body>
+        <button type="text" style="display: none;" id="AnkaraMapBtn" onclick="AnkaraMapRoute()">AnkaraMap (Route)</button>
+
+        <!-- jQuery -->
+        <script src="plugins/jquery/jquery.min.js"></script>
+
+        <script type="text/javascript">
+        $(document).ready(function(){
+            $('#AnkaraMapBtn').trigger('click');
+        });
+
+        function AnkaraMapRoute() {
+            location.replace("http://admincbs.local.com:6564/demo.html")
+        }
+
+        </script>
+     </body>
+ </html>
+ <!--
+ * @copyright Can Mavioğlu (2020)
+ -->
