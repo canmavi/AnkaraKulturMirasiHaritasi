@@ -163,7 +163,7 @@
 
   <!--Footer-->
   <footer class="main-footer">
-    <img src="/dist/img/hulogo2.png" class="img-fluid hacettepe-logo">
+    <img src="dist/img/hulogo2.png" class="img-fluid hacettepe-logo">
     <strong class="footer-hu">
         <a target="_blank" href="http://www.bby.hacettepe.edu.tr/">&nbsp;
         Hacettepe Üniversitesi - Bilgi Belge Yönetimi</a>&nbsp;
@@ -259,7 +259,7 @@
                                     </ul>
                                   </div>
                                   <div class="col-3 text-center">
-                                    <img src="../../dist/img/cmfoto.jpg" alt="Can Mavioğlu" class="img-fluid dev-img-circle">
+                                    <img src="dist/img/cmfoto.jpg" alt="Can Mavioğlu" class="img-fluid dev-img-circle">
                                   </div>
                                 </div>
                               </div>
@@ -443,12 +443,12 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     maps5 = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
 	  maxZoom: 18,
     subdomains:['mt1','mt1','mt2','mt3'],
-	  attribution: 'Hacettepe University - Term Project / <img src="../../dist/img/google.svg" class="maplogo-custom"/> Google Haritalar'
+	  attribution: 'Hacettepe University - Term Project / <img src="dist/img/google.svg" class="maplogo-custom"/> Google Haritalar'
     }),
     maps6 = L.tileLayer('https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
 	  maxZoom: 20,
     subdomains:['mt0','mt1','mt2','mt3'],
-	  attribution: 'Hacettepe University - Term Project / <img src="../../dist/img/google.svg" class="maplogo-custom"/> Google Haritalar'
+	  attribution: 'Hacettepe University - Term Project / <img src="dist/img/google.svg" class="maplogo-custom"/> Google Haritalar'
     });
 
     var map = L.map('map',{ center: [39.215757, 35.042289],zoom: 6,layers:[mapsBase],
@@ -522,9 +522,9 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     "<i class='fas fa-map-marked-alt fa-lg layer-set-default'></i> Harita 1": mapsBase,
     "<i class='fas fa-map-marked-alt fa-lg layer-set-others'></i> Harita 2": maps2,
     "<i class='fas fa-map-marked-alt fa-lg layer-set-others'></i> Harita 3": maps3,
-    "<img src='../../dist/img/bing.svg' class='maplogo-custom'/> Bing": maps4,
-    "<img src='../../dist/img/google.svg' class='maplogo-custom'/> Google - <i class='fas fa-street-view fa-lg'></i>&nbsp;Sokak": maps5,
-    "<img src='../../dist/img/google.svg' class='maplogo-custom'/> Google - <i class='fas fa-satellite-dish fa-lg'></i>&nbsp;Uydu": maps6
+    "<img src='dist/img/bing.svg' class='maplogo-custom'/> Bing": maps4,
+    "<img src='dist/img/google.svg' class='maplogo-custom'/> Google - <i class='fas fa-street-view fa-lg'></i>&nbsp;Sokak": maps5,
+    "<img src='dist/img/google.svg' class='maplogo-custom'/> Google - <i class='fas fa-satellite-dish fa-lg'></i>&nbsp;Uydu": maps6
     };
 
     /*Over Layers*/
