@@ -6,5 +6,8 @@ Ankara İline Ait Kültür Miraslarının Harita Üzerinde Gösterilmesi
   <li>HTML</li>
   <li>CSS</li>
   <li>JavaScript (Kütüphaneler : JQuery, Leaflet)</li>
-  <li><i>(GitHub Pages'da Yayınlamak için Statik Olarak Tasarlandı.)</i></li>
+  <span><i>(GitHub Pages'da Yayınlamak için Statik Olarak Tasarlandı.)</i></span>
 </ul>
+
+<hr>
+<span>&copy; KM-CBS (2020)</span>
