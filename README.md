@@ -1,4 +1,4 @@
-# <img src="https://github.com/canmavi/km-cbs/blob/master/dist/img/CBSLogo.png?raw=true" style="height:30px; width:30px;"/> KM-CBS (Ankara Kültür Mirası Haritası)
+# <img src="https://raw.githubusercontent.com/canmavi/km-cbs/master/dist/img/CBSLogo.png" style="height:30px !important; width:30px;"/> KM-CBS (Ankara Kültür Mirası Haritası)
 Ankara İline Ait Kültür Miraslarının Harita Üzerinde Gösterilmesi
 
 <b><i>Kullanılan Teknolojiler</i></b>
