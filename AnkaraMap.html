@@ -410,8 +410,6 @@
 <script type="text/javascript">
 
 $( document ).ready(function() {
-    $('.nav-item')
-
     /*Internet Explorer 9 ve Alti Uyarisi*/
     if (L.Browser.ielt9)
     toastr.warning('IE Tarayıcılarda Haritada Problem Yaşanabilir.','Internet Explorer')
@@ -498,7 +496,7 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
       }
     });
 
-    //Harita Verileri Yükleme
+    //Harita Verileri Yükleme(Tum Osmanlı Camileri)
     var markers =  omnivore.geojson('data/AnkaraData.json')
     .on('ready', function (layer) {
     //map.fitBounds(markers.getBounds());
@@ -519,6 +517,27 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
       disableClusteringAtZoom: 18
     });
     map.addLayer(markerClusters);
+
+    //14 ve 15 Yuzyil Camileri
+    var markers2 =  omnivore.geojson('data/14and15yyOsmanliAnkaraData.json')
+    .on('ready', function (layer) {
+    markerClusters2.addLayer(markers2);
+    //map.addLayer(markerClusters2);
+    this.eachLayer(function (marker) {
+        marker.bindPopup(
+        fotoController(marker.toGeoJSON().properties.ImgName,marker.toGeoJSON().properties.Name) +
+        nameLogoChooser(marker.toGeoJSON().properties.TypeEnum) +  '<b>' + marker.toGeoJSON().properties.Name + '</b>' +
+        '<br><b>Türü: </b>' + marker.toGeoJSON().properties.Type + 
+        '<br><b>Kültür: </b>' + marker.toGeoJSON().properties.Culture +
+        '<br><b>Yıl: </b>' + dateController(marker.toGeoJSON().properties.Dated) + 
+        externalButtonController(marker.toGeoJSON().properties.Id), { autoPanPadding: [5, 55] });
+        });
+    });
+
+    var markerClusters2 = L.markerClusterGroup({
+      disableClusteringAtZoom: 18
+    });
+    //map.addLayer(markerClusters2);
     
     var multipleMaps = {
     "<i class='fas fa-map-marked-alt fa-lg layer-set-default'></i> Harita 1": mapsBase,
@@ -531,9 +550,38 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
 
     /*Over Layers*/
     var AnkaraOsmanliCamiler = markerClusters;
+    var AnkaraOsmanliCamiler14ve15yy = markerClusters2;
     var overlays = {
         "<i class='fas fa-mosque'></i> <span>Osmanlı Dönemi Camileri</span>": AnkaraOsmanliCamiler,
+        "<i class='fas fa-mosque'></i> <span>14-15 YY. Osmanlı Dönemi<br>Camileri</span>": AnkaraOsmanliCamiler14ve15yy,
     };
+
+    //Checkboxların Idleri
+    var overlaysCheckbox = [
+        { InputId: "slc1"},
+        { InputId: "slc2"}
+    ];
+
+    //Change Event Checbox Set Data Map
+    $(document).on('change', '.leaflet-control-layers-selector', function() {
+      $checkbox = $(this);
+    if($checkbox[0].id == overlaysCheckbox[0].InputId || $checkbox[0].id == overlaysCheckbox[1].InputId){
+      var changeWillId = $checkbox[0].id == overlaysCheckbox[0].InputId ? overlaysCheckbox[1].InputId : overlaysCheckbox[0].InputId;
+          if ($checkbox.is(':checked')) {
+              $("#" + changeWillId).prop( "checked", false );
+              if(changeWillId==overlaysCheckbox[1].InputId)
+              {
+                markerClusters2.removeLayer(markers2);
+                markerClusters.addLayer(markers);
+              }
+              else if(changeWillId==overlaysCheckbox[0].InputId)
+              {
+                markerClusters.removeLayer(markers);
+                markerClusters2.addLayer(markers2);
+              }            
+          }
+      }
+    });
 
     //Haritaları Ekle
     L.control.layers(multipleMaps,overlays).addTo(map);
@@ -755,6 +803,15 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
   
     $(window).on("load", function () {
       $("#searchtext7").attr("spellcheck", "false");
+
+      //Haritadaki Checkboxlara Id Atanmasi
+      var syc = 0;
+      Array.from(document.querySelectorAll('.leaflet-control-layers-selector')).forEach(function(element) {
+        if(element.type!="radio"){
+          syc++;
+          $(element).attr('id',"slc"+syc);
+        }            
+      });
     });
 
 /*
