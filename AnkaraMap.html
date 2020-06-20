@@ -150,7 +150,7 @@
             </div>
             <div class="leaflet-custom-frontbutton">
               <button type="button" onclick="fitBounds()" class="btn btn-block bg-gradient-danger btn-md">Ankara</button>
-              <button type="submit" title="Verileri İndir" onclick="downloadURI('data/AnkaraData.json','AnkaraData')" class="btn bg-gradient-primary btn-md btn-pgdownload"><i class="fas fa-download"></i></button>
+              <button type="submit" title="Tüm Verileri İndir" onclick="downloadURI('data/AnkaraData.json','AnkaraData')" class="btn bg-gradient-primary btn-md btn-pgdownload"><i class="fas fa-download"></i></button>
               <!-- <button type="submit" title="Ekran Görüntüsü Al" class="btn bg-gradient-success btn-md btn-pgdownload"><i class="far fa-image"></i></button> -->
           </div>
 
@@ -573,11 +573,17 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
               {
                 markerClusters2.removeLayer(markers2);
                 markerClusters.addLayer(markers);
+                map.removeControl(controlSearch2);
+                map.addControl(controlSearch);
+                $("#searchtext7").attr("spellcheck", "false");
               }
               else if(changeWillId==overlaysCheckbox[0].InputId)
               {
                 markerClusters.removeLayer(markers);
                 markerClusters2.addLayer(markers2);
+                map.removeControl(controlSearch);
+                map.addControl(controlSearch2);
+                $("#searchtext7").attr("spellcheck", "false");
               }            
           }
       }
@@ -649,6 +655,28 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
     });
 
     map.addControl(controlSearch);
+
+      //14 ve 15 Yuzyil Arama icin
+      var controlSearch2 = new L.Control.Search({
+      position:'topright',
+      initial: true,
+      zoom: 18,
+      layer: markerClusters2,
+      propertyName: 'Name',
+      casesensitive: false,
+      tipAutoSubmit:true,
+      autoType:false,
+      tooltipLimit:12,
+      textCancel:'İptal',
+      textErr:'Aranan Bulunamadı!',
+      textPlaceholder:'Arama..',
+      hideMarkerOnCollapse:true,
+      autoCollapse:false,
+      buildTip: function(text, val) {
+			var type = val.layer.feature.properties.Type;
+			return '<a href="#">'+text+'<i class="fas fa-mosque search-result-icon"></i></span>'+'</a>';
+		  }
+    }); 
     /*Arama*/
 
     /*Tam Ekran*/
