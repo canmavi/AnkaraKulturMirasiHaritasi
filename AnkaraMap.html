@@ -410,9 +410,16 @@
 <script type="text/javascript">
 
 $( document ).ready(function() {
-    /*Internet Explorer 9 ve Alti Uyarisi*/
-    if (L.Browser.ielt9 || L.Browser.ielt10 ||  L.Browser.ielt11)
-    toastr.warning('IE Tarayıcılarda Haritada Düzgün Çalışmamaktadır. Lütfen Chrome, Firefox, Edge, Opera Gibi Güncel Tarayıcı Kullanınız!','Internet Explorer')
+    /*Internet Explorer 9 ve Alti Uyarisi (Leaflet Tarafından)*/
+    if (L.Browser.ielt9)
+    toastr.warning('IE Tarayıcılarda Haritada Problem Yaşanabilir.','Internet Explorer')
+
+    //JS IE Warning
+    var ua = window.navigator.userAgent;
+    var isIE = /MSIE|Trident/.test(ua);
+    if (isIE) {
+      toastr.warning('IE Tarayıcılarda Haritada Düzgün Çalışmamaktadır. Lütfen Chrome, Firefox, Edge, Opera Gibi Güncel Tarayıcı Kullanınız!','Internet Explorer')
+    }
 
     if(!checkCookie()){
       $('#modal-open').modal('show');      
