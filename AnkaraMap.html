@@ -5,9 +5,27 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Ankara Kültürel Mirası Haritası | KM-CBS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Ankara Kültürel Miras Haritası">
+  <meta name="description" content="Hacettepe Üniversitesi Bilgi Belge Yönetimi bölümü 2020 yılı dönem projesi olarak harita üzerinde Ankara'daki kültürel miraslarının gösterilmesi sağlanmaktadır.">
   <meta name="author" content="Can Mavioğlu">
   <meta name="keywords" content="CBS, KM-CBS, Coğrafi Bilgi Sistemi, Ankara Kültür Mirası">
+
+  <!--Social Media Tags-->
+  <meta itemprop="name" content="Ankara Kültürel Miras Haritası">
+  <meta itemprop="description" content="Hacettepe Üniversitesi Bilgi Belge Yönetimi bölümü 2020 yılı dönem projesi olarak harita üzerinde Ankara'daki kültürel miraslarının gösterilmesi sağlanmaktadır.">
+  <meta itemprop="image" content="https://canmavi.github.io/km-cbs/dist/img/CBSLogo.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://canmavi.github.io/km-cbs/AnkaraMap.html">
+  <meta property="og:title" content="Ankara Kültürel Miras Haritası">
+  <meta property="og:description" content="Hacettepe Üniversitesi Bilgi Belge Yönetimi bölümü 2020 yılı dönem projesi olarak harita üzerinde Ankara'daki kültürel miraslarının gösterilmesi sağlanmaktadır.">
+  <meta property="og:image" content="https://canmavi.github.io/km-cbs/dist/img/CBSLogo.png">
+  <meta property="og:site_name" content="KM-CBS">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ankara Kültürel Miras Haritası>
+  <meta name="twitter:description" content="Hacettepe Üniversitesi Bilgi Belge Yönetimi bölümü 2020 yılı dönem projesi olarak harita üzerinde Ankara'daki kültürel miraslarının gösterilmesi sağlanmaktadır.">
+  <meta name="twitter:image" content="https://canmavi.github.io/km-cbs/dist/img/CBSLogo.png">
+  <meta name="twitter:url" content="https://canmavi.github.io/km-cbs/AnkaraMap.html">
 
   <!-- Favicon -->
   <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
@@ -410,6 +428,10 @@
 <script type="text/javascript">
 
 $( document ).ready(function() {
+    /*User-Agent Check*/
+    var userAgent = "User-agent header sent: " + navigator.userAgent;
+    console.log(userAgent);
+
     /*Internet Explorer 9 ve Alti Uyarisi (Leaflet Tarafından)*/
     if (L.Browser.ielt9)
     toastr.warning('IE Tarayıcılarda Haritada Problem Yaşanabilir.','Internet Explorer')
