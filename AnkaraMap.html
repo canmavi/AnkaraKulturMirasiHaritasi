@@ -12,19 +12,19 @@
   <!--Social Media Tags-->
   <meta itemprop="name" content="Ankara Kültürel Miras Haritası">
   <meta itemprop="description" content="Hacettepe Üniversitesi Bilgi Belge Yönetimi bölümü 2020 yılı dönem projesi olarak harita üzerinde Ankara'daki kültürel miraslarının gösterilmesi sağlanmaktadır.">
-  <meta itemprop="image" content="https://canmavi.github.io/km-cbs/dist/img/CBSLogo.png">
+  <meta itemprop="image" content="https://canmavi.github.io/km-cbs/dist/img/kbcbssocialimg.png">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://canmavi.github.io/km-cbs/AnkaraMap.html">
   <meta property="og:title" content="Ankara Kültürel Miras Haritası">
   <meta property="og:description" content="Hacettepe Üniversitesi Bilgi Belge Yönetimi bölümü 2020 yılı dönem projesi olarak harita üzerinde Ankara'daki kültürel miraslarının gösterilmesi sağlanmaktadır.">
-  <meta property="og:image" content="https://canmavi.github.io/km-cbs/dist/img/CBSLogo.png">
+  <meta property="og:image" content="https://canmavi.github.io/km-cbs/dist/img/kbcbssocialimg.png">
   <meta property="og:site_name" content="KM-CBS">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Ankara Kültürel Miras Haritası>
   <meta name="twitter:description" content="Hacettepe Üniversitesi Bilgi Belge Yönetimi bölümü 2020 yılı dönem projesi olarak harita üzerinde Ankara'daki kültürel miraslarının gösterilmesi sağlanmaktadır.">
-  <meta name="twitter:image" content="https://canmavi.github.io/km-cbs/dist/img/CBSLogo.png">
+  <meta name="twitter:image" content="https://canmavi.github.io/km-cbs/dist/img/kbcbssocialimg.png">
   <meta name="twitter:url" content="https://canmavi.github.io/km-cbs/AnkaraMap.html">
 
   <!-- Favicon -->
@@ -429,8 +429,21 @@
 
 $( document ).ready(function() {
     /*User-Agent Check*/
-    var userAgent = "User-agent header sent: " + navigator.userAgent;
-    console.log(userAgent);
+
+var veriler = "User-agent header sent: " + navigator.userAgent;
+if (typeof (Storage) !== "undefined") {
+
+  // Depola
+  localStorage.ADI = "Can";
+
+  // Listele
+  for (var i = 0; i < localStorage.length; i++) {
+    veriler += localStorage.key(i) + ": " + localStorage.getItem(localStorage.key(i)) + "<br />";
+  }
+  console.log(veriler);
+} else {
+  console.log("Tarayıcınız Web Storage API desteklemiyor.");
+}
 
     /*Internet Explorer 9 ve Alti Uyarisi (Leaflet Tarafından)*/
     if (L.Browser.ielt9)
