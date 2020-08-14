@@ -429,12 +429,6 @@
 <script type="text/javascript">
 
 $( document ).ready(function() {
-    /*User-Agent Check*/
-    var testObject = "User-agent header sent: " + navigator.userAgent;
-    localStorage.setItem('testObject', JSON.stringify(testObject));
-    var retrievedObject = localStorage.getItem('testObject');
-    console.log('retrievedObject: ', JSON.parse(retrievedObject));
-
     /*Internet Explorer 9 ve Alti Uyarisi (Leaflet Tarafından)*/
     if (L.Browser.ielt9)
     toastr.warning('IE Tarayıcılarda Haritada Problem Yaşanabilir.','Internet Explorer')
