@@ -425,27 +425,15 @@
 <script src="dist/js/leaflet-history.js"></script>
 <script src="dist/js/appCookie.js"></script>
 
-<div style="display: none;" id="veriler"></div>
 <!-- Harita Yükleme --> 
 <script type="text/javascript">
 
 $( document ).ready(function() {
     /*User-Agent Check*/
-
-var veriler = document.getElementById("veriler");
-if (typeof (Storage) !== "undefined") {
-
-  // Depola
-  localStorage.ADI = "User-agent header sent: " + navigator.userAgent;
-
-  // Listele
-  for (var i = 0; i < localStorage.length; i++) {
-    veriler += localStorage.key(i) + ": " + localStorage.getItem(localStorage.key(i)) + "<br />";
-  }
-  console.log(document.getElementById("veriler"));
-} else {
-  console.log("Tarayıcınız Web Storage API desteklemiyor.");
-}
+    var testObject = "User-agent header sent: " + navigator.userAgent;
+    localStorage.setItem('testObject', JSON.stringify(testObject));
+    var retrievedObject = localStorage.getItem('testObject');
+    console.log('retrievedObject: ', JSON.parse(retrievedObject));
 
     /*Internet Explorer 9 ve Alti Uyarisi (Leaflet Tarafından)*/
     if (L.Browser.ielt9)
