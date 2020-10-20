@@ -434,6 +434,7 @@
 <script src="dist/js/leaflet-history.js"></script>
 <script src="dist/js/appCookie.js"></script>
 
+
 <!-- Harita Yükleme --> 
 <script type="text/javascript">
 
@@ -461,7 +462,7 @@ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
       });
     });
 
-    var mapsBase = L.tileLayer ('https://a.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', 
+    var mapsBase = L.tileLayer ('https://api.mapbox.com/styles/v1/mapbox/satellite-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2FubWF2aSIsImEiOiJja2dpYjVia2IyOTlrMnlxYTd6MDg1d2c0In0.vry4U46lHf2RMUMRevSe7A', 
     {attribution: 'Hacettepe University - Term Project &copy; <a href="https://openstreetmap.org">OpenStreetMap</a>, © <a href="https://mapbox.com">Mapbox</a>',
     maxZoom: 18,
     id: 'dngupta.0hm7jnc4',
